@@ -58,9 +58,30 @@ Dataset yang digunakan pada proyek ini adalah House Sales in King County, USA. D
 Untuk memahami *Motorcycle* dataset akan menggunakan beberapa tahapan dari teknik *Explanatory Data Analysis* (EDA) sebagai berikut:
 1.   Deskripsi Variabel
 
-![image](https://user-images.githubusercontent.com/89571899/204506928-1adaee97-8bc2-45c8-9d8c-10f256f2e16a.png)
+|   # |        Column | Non-Null Count |   Dtype |
+|----:|--------------:|---------------:|--------:|
+| --- |        ------ | -------------- |   ----- |
+|  0  |            id | 21613 non-null |   int64 |
+|  1  |          date | 21613 non-null |  object |
+|  2  |         price | 21613 non-null | float64 |
+|  3  |      bedrooms | 21613 non-null |   int64 |
+|  4  |     bathrooms | 21613 non-null | float64 |
+|  5  |   sqft_living | 21613 non-null |   int64 |
+|  6  |      sqft_lot | 21613 non-null |   int64 |
+|  7  |        floors | 21613 non-null | float64 |
+|  8  |    waterfront | 21613 non-null |   int64 |
+| 9   | view          | 21613 non-null | int64   |
+| 10  | condition     | 21613 non-null | int64   |
+| 11  | grade         | 21613 non-null | int64   |
+| 12  | sqft_above    | 21613 non-null | int64   |
+| 13  | sqft_basement | 21613 non-null | int64   |
+| 14  | yr_built      | 21613 non-null | int64   |
+| 15  | yr_renovated  | 21613 non-null | int64   |
+| 16  | zipcode       | 21613 non-null | int64   |
+| 17  | lat           | 21613 non-null | float64 |
+| 18  | long          | 21613 non-null | float64 |
 
-Gambar 1. Info dataset
+Tabel 1. Info dataset
 
 Pada Gambar 1, dapat dilihat bahwa dataset terdiri dari:
 *   5 variabel bertipe float
@@ -71,6 +92,12 @@ Pada Gambar 1, dapat dilihat bahwa dataset terdiri dari:
 
 Dataset yang dipakai tidak memiliki missing value. 
 Kemudian menangani *outlier*, sampel yang nilainya sangat jauh dari cakupan umum data utama. Pada kasus ini, *outliers* akan dideteksi dengan teknik visualisasi data (boxplot). Kemudian, *ouliers* akan ditangani dengan teknik *IQR method*.
+
+![outlier](https://user-images.githubusercontent.com/89571899/204520626-ccc24f12-33be-4e83-868c-4db7d66d14ce.png)
+
+Gambar 1. Boxplot fitur 'price'
+
+Boxplot diatas menunjukkan adanya outlier, yaitu titik data diujung kanan yang terpisah jauh dengan titik data lainnya
 
 3.   Analisis *Univariate*
 Fitur kategori
@@ -139,13 +166,6 @@ Pada tahap ini, model *machine learning* yang akan dipakai ada tiga algoritma. L
 		- **kelebihan** : Algoritma ini sangat *powerful* dalam meningkatkan akurasi prediksi. Algoritma *boosting* sering mengungguli model yang lebih sederhana seperti *logistic regression* dan *random forest*
 		- **kekurangan** : *Learning* secara progresif dan sangat sensitif terhadap data *noise* dan *outlier*.
 
-*Error* dari masing-masing model:
-
-![mse](https://user-images.githubusercontent.com/89571899/204508062-d0a88292-40b4-4b4f-be06-5612384a3430.png)
-
-Gambar 7. Visualisasi mse dari 3 model
-
-Pada Gambar 7, dapat diliat bahwa model *Boosting* memiliki nilai *error* yang lebih kecil dibanding model lain menandakan bahwa model *Boosting* merupakan model terbaik yang dapat digunakan untuk memprediksi harga jual rumah.
 
 ## Evaluation
 Metrik yang akan kita gunakan pada prediksi ini adalah MSE atau *Mean Squared Error* yang menghitung jumlah selisih kuadrat rata-rata nilai sebenarnya dengan nilai prediksi. MSE didefinisikan dalam persamaan berikut
@@ -162,7 +182,7 @@ n = banyaknya data
 
 berikut adalah hasil evaluasi ketiga model menggunakan mse pada tabel 1.
 
-Tabel 1. Nilai mse pada data uji dan data latih dari ketiga model
+Tabel 2. Nilai mse pada data uji dan data latih dari ketiga model
 
 |              |       train_mse | test_mse         |
 |-------------:|----------------:|------------------|
@@ -170,10 +190,16 @@ Tabel 1. Nilai mse pada data uji dan data latih dari ketiga model
 | RandomForest |  1649306.154105 |   88883752.13927 |
 |   Boosting   | 10655061.083537 |  42409709.805507 |
 
+*Error* dari masing-masing model:
 
-Hasil prediksi masing-masing model dari 10 data dapat dilihat pada tabel 2.
+![mse](https://user-images.githubusercontent.com/89571899/204508062-d0a88292-40b4-4b4f-be06-5612384a3430.png)
 
-Tabel 2. Hasil prediksi ketiga model dari 10 data
+Gambar 7. Visualisasi mse dari 3 model
+
+
+Hasil prediksi masing-masing model dari 10 data dapat dilihat pada tabel 3.
+
+Tabel 3. Hasil prediksi ketiga model dari 10 data
 
 |       |   y_true | prediksi_KNN | prediksi_RandomForest | prediksi_Boosting |
 |------:|---------:|-------------:|----------------------:|------------------:|
